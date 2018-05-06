@@ -1,0 +1,16 @@
+.drinks-page {
+    .drinks-menu {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 1000px;
+        margin: auto;
+        justify-content: space-between;
+    }
+    .drinks {
+        width: 30%;
+        background: white;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border: 2px solid #006491;
+    }
+}

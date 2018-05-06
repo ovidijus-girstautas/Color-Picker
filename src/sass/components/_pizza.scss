@@ -1,0 +1,17 @@
+.pizza-page{
+    .pizza-menu{
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 1000px;
+        margin: auto;
+        justify-content: space-between;
+    }
+
+    .pizza{
+        width: 30%;
+        background: white;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border: 2px solid #006491;
+    }
+}

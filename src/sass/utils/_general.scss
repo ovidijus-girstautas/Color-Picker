@@ -1,0 +1,41 @@
+body{
+    background-color: #ECECEC;
+    text-align: center;
+}
+
+.active{
+    background: #006491;
+    padding: 8px;
+    color: white;
+}
+
+button, .button{
+    border: none;
+    position: relative;
+    padding: 10px 40px;
+    margin: 0px 10px 10px 0px;
+    border-radius: 10px;
+    font-family: 'Pacifico',
+    cursive;
+    font-size: 25px;
+    color: #FFF;
+    text-decoration: none;
+    background-color: #e42441;
+    border-bottom: 5px solid #BD3E31;
+    text-shadow: 0px -2px #BD3E31;
+    transition: all 0.1s;
+    -webkit-transition: all 0.1s;
+    outline: none;  
+}
+
+button:active, .button:active {
+    transform: translate(0px, 5px);
+    -webkit-transform: translate(0px, 5px);
+    border-bottom: 1px solid;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}

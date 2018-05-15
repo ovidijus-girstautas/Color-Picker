@@ -1,44 +1,23 @@
 header{
-    // display: flex;
-    // position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
-    background: #e42441;
-    // justify-content: space-between;
     align-items: center;
-    height: 40px;
     text-align: center;
+    margin-bottom: 50px;
+
     a{
-        color: white;
         outline: none;
         text-decoration: none;
-        margin: 10px;
         text-align: center;
-        line-height: 40px;
         font-size: 22px;
-    }
-    h2{
-        color: #fff;
-        font-size: 18px;
-        width: 30%;
-        text-align: center;
+        display: inline-block;
+        margin: 50px;
+
     }
     h1{
         font-family: 'Architects Daughter', cursive;
         font-size: 24px;
-        color: #fff;
         text-align: left;
-        span{
-            color: red;
-        }
-    }
-    li{
-        display: inline-block;
-        text-align: right;
-        margin-right: 20px;
-        color: #fff;
-        user-select: none;
-        cursor: pointer;
+        color: black;
+        // margin: 50px;
     }
 }

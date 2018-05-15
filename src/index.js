@@ -1,21 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AppRoutes from './AppRoutes';
-// import App from './App';
+import "normalize.css";
 import './sass/main.scss';
 import registerServiceWorker from './registerServiceWorker';
-import "normalize.css";
 import { createStore, combineReducers /*, applyMiddleware */} from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {Provider} from 'react-redux';
-import pizzaReducer from "./reducers/pizzareducer";
-import drinksReducer from "./reducers/drinksreducer";
-import ordersReducer from "./reducers/ordersreducer";
+import navReducer from "./reducers/navReducer";
 
 const rootReducer = combineReducers({
-    pizza: pizzaReducer,
-    drinks: drinksReducer,
-    orders: ordersReducer
+    nav: navReducer,
 })
 
 const store = createStore(rootReducer, composeWithDevTools(
@@ -23,7 +18,7 @@ const store = createStore(rootReducer, composeWithDevTools(
     // other store enhancers if any
 ));
 
-console.log(store.getState());
+// console.log(store.getState());
 
 // import me from './playground/default-exports';
 // import {food, getInfo} from './playground/named-exports';

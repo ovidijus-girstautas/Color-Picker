@@ -4,9 +4,7 @@ body{
 }
 
 .active{
-    background: #006491;
-    padding: 8px;
-    color: white;
+    border-bottom: 3px solid red;
 }
 
 button, .button{
@@ -38,8 +36,4 @@ button:active, .button:active {
     content: "";
     clear: both;
     display: table;
-}
-
-.new{
-    background: #000;
 }

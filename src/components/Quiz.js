@@ -24,8 +24,8 @@ class Quiz extends React.Component {
         level: 25,
         correct: 0,
         mistake: 0,
-        isActiveCorrect: Array(49).fill(false),
-        isActiveMistake: Array(49).fill(false),
+        isActiveCorrect: Array(60).fill(false),
+        isActiveMistake: Array(60).fill(false),
         squares: []
     }
 
@@ -59,7 +59,7 @@ class Quiz extends React.Component {
             
             const divs = [];
 
-            for (let i = 45; i < 50; i++) {
+            for (let i = 55; i < 60; i++) {
                 divs.push(
                     <div
                         key={i}
@@ -69,7 +69,7 @@ class Quiz extends React.Component {
                     ></div>)
             }
 
-            for (let i = 0; i < 45; i++) {
+            for (let i = 0; i < 55; i++) {
                 divs.push(<div key={i} id={"square" + i} className="quiz" style={{ backgroundColor: this.state.activeColor }}></div>)
             }
 
@@ -91,8 +91,8 @@ class Quiz extends React.Component {
         this.setState({ 
             correct: 0,
             mistake: 0,
-            isActiveCorrect: Array(50).fill(false),
-            isActiveMistake: Array(50).fill(false)
+            isActiveCorrect: Array(60).fill(false),
+            isActiveMistake: Array(60).fill(false)
         });
     };
 

@@ -58,7 +58,9 @@ class Quiz extends React.Component {
             activeColor: color,
             r: (r + this.state.level),
             g: (g + this.state.level),
-            b: (b + this.state.level)
+            b: (b + this.state.level),
+            isActiveCorrect: Array(60).fill(false),
+            isActiveMistake: Array(60).fill(false)
         }));
     };
     

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
-// import classNames from 'classnames';
 
 
 class Quiz extends React.Component {
@@ -29,20 +28,31 @@ class Quiz extends React.Component {
         squares: []
     }
 
+    //Sets the array true/false for either wrong or correct answer - used for classNames
     toggleClass = (i, color) => {
-        let newActive = this.state.isActiveCorrect.slice()
-        if(color !== this.state.activeColor){
-            newActive[i] = true
-            this.setState({ isActiveCorrect: newActive })
+        if(this.state.correct === 5){
+            ;
+        }else{
+            let newActiveCorrect = this.state.isActiveCorrect.slice()
+            let newActiveMistake = this.state.isActiveMistake.slice()
+            if (color !== this.state.activeColor) {
+                newActiveCorrect[i] = true
+                this.setState({ isActiveCorrect: newActiveCorrect })
+            } else {
+                newActiveMistake[i] = true
+                this.setState({ isActiveMistake: newActiveMistake })
+            }
         }
     };
 
+    // Turns the game square ON/OFF
     setActive = () =>{
         this.setState({
             active: true
         })
     };
 
+    // Initial game start
     setColor = (color, r, g, b) =>{
         this.setState(prevState => ({
             activeColor: color,
@@ -52,13 +62,10 @@ class Quiz extends React.Component {
         }));
     };
     
-
+    // Generates 10x6 square field where the game is played.
     displayForm(color) {
-
         setTimeout(() => {
-            
             const divs = [];
-
             for (let i = 55; i < 60; i++) {
                 divs.push(
                     <div
@@ -68,25 +75,17 @@ class Quiz extends React.Component {
                         style={{ backgroundColor: "rgb(" + this.state.r + "," + this.state.g + "," + this.state.b + ")" }}
                     ></div>)
             }
-
             for (let i = 0; i < 55; i++) {
                 divs.push(<div key={i} id={"square" + i} className="quiz" style={{ backgroundColor: this.state.activeColor }}></div>)
             }
-
             const shuffledDIv = _.shuffle(divs).slice(0);
             this.setState({
                 squares: shuffledDIv
             })
-
         }, 10);
-
-       
     };
 
-    // setLevel = () =>{
-    //     this.setState({ level: this.state.level - 1 });
-    // };
-
+    //Used for next level button, to make sure states are cleared before next level starts.
     resetMistakes = () =>{
         this.setState({ 
             correct: 0,
@@ -96,6 +95,7 @@ class Quiz extends React.Component {
         });
     };
 
+    //Used to make sure state is ready when the color is picked for game start **WILL GET DELETED
     resetLevel = () => {
         this.setState({ 
             level: 25,
@@ -104,6 +104,7 @@ class Quiz extends React.Component {
          });
     };
 
+    // Makes sure the game gets harder as the level progresses
     setPlayColor = () =>{
         this.setState({
             r: this.state.r -1,
@@ -113,27 +114,36 @@ class Quiz extends React.Component {
         });
     };
 
+    //Checks if the color is either wrong or right, increases the mistakes and correct answer states
+    //In case of too much mistakes, disabled the playfield
+    //if all correct answers are checked, allows to progress to next round
     checkColor = (color, i) =>{
-        if(this.state.activeColor !== color && this.state.isActiveCorrect[i] === false){
+        if(this.state.correct === 5){
+            ;
+        } else if(this.state.activeColor !== color && this.state.isActiveCorrect[i] === false){
             this.setState({
                 correct: this.state.correct + 1
             })
         } else if (this.state.activeColor !== color && this.state.isActiveCorrect[i] === true) {
             ;
+        } else if (this.state.activeColor === color && this.state.isActiveMistake[i] === true) {
+            ;
         }else{
-            if (this.state.mistake <= 3 && this.state.isActiveCorrect[i] === false) {
+            if (this.state.mistake <= 2) {
                 this.setState({
                     mistake: this.state.mistake + 1
                 })
             }else{
                 this.setState({
                     active: false,
-                    isActiveCorrect: Array(49).fill(false),
+                    isActiveCorrect: Array(60).fill(false),
+                    isActiveMistake: Array(60).fill(false),
                     mistakes: 0
                 })
             }
         }
     };
+    
 
 
     render() {
@@ -151,21 +161,26 @@ class Quiz extends React.Component {
             )
         });
 
-        // const squareClass = {
-        //     if(){
-                
-        //     }
-        // }
-
         const squares = this.state.squares.map((item, i) =>{
+
+            let squareClass;
+            if (this.state.isActiveCorrect[i] === true) {
+                squareClass = "quiz border"
+            } else if (this.state.isActiveMistake[i] === true) {
+                squareClass = "quiz error"
+            }else{
+                squareClass = "quiz"
+            };
+
             return(
                 <div 
                     key={item.key} 
-                    className={this.state.isActiveCorrect[i] ? "quiz border" : item.props.className} 
+                    className={squareClass} 
                     style={item.props.style}
                     onClick={() => { this.checkColor(item.props.style.backgroundColor, i); this.toggleClass(i, item.props.style.backgroundColor) }}></div>
             )
         });
+
 
         return (
             <div>
@@ -175,10 +190,7 @@ class Quiz extends React.Component {
                 
                 <div className="square">
                     {(this.state.active) ? squares : null}
-                    {/* {squares} */}
-                    {/* {(this.state.mistake === 2) ? <h1>LOST! Pick a color!</h1>: null} */}
                     {(this.state.correct >= 5 ? <button onClick={() => { this.setPlayColor(); this.resetMistakes(); this.displayForm() }}>Next Level!</button> : null)}
-                    
                 </div>
 
             </div>
